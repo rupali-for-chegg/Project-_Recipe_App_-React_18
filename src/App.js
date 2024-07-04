@@ -1,30 +1,25 @@
-// App.js
 import React, { useState } from 'react';
-import RecipeCreate from './RecipeCreate';
 import RecipeList from './RecipeList';
-import RecipeData from './RecipeData'; // Assuming RecipeData is in the same directory
+import RecipeData from './RecipeData';
 import './App.css';
 
 function App() {
-  const [recipes, setRecipes] = useState(RecipeData); // Initialize state with RecipeData
+    const [recipes, setRecipes] = useState(RecipeData);
 
-  const addRecipe = (newRecipe) => {
-    setRecipes([...recipes, newRecipe]);
-  };
+    const addRecipe = (newRecipe) => {
+        setRecipes([...recipes, newRecipe]);
+    };
 
-  const deleteRecipe = (index) => {
-    const updatedRecipes = [...recipes];
-    updatedRecipes.splice(index, 1);
-    setRecipes(updatedRecipes);
-  };
+    const deleteRecipe = (indexToDelete) => {
+        setRecipes(recipes.filter((_, index) => index !== indexToDelete));
+    };
 
-  return (
-    <div className="App">
-      <h1 className="header">Delicious Food Recipes</h1>
-      <RecipeCreate addRecipe={addRecipe} />
-      <RecipeList recipes={recipes} deleteRecipe={deleteRecipe} />
-    </div>
-  );
+    return (
+        <div className="App">
+            <h1>Delicious Food Recipes</h1>
+            <RecipeList recipes={recipes} deleteRecipe={deleteRecipe} addRecipe={addRecipe} />
+        </div>
+    );
 }
 
 export default App;
